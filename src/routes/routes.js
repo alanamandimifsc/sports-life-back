@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const locaisRoutes = require('./locais.routes');
 const usuariosRoutes = require('./usuarios.routes');
-// const autenticador = require('../middlewares/autenticador');
+const autenticador = require('../middlewares/autenticador');
 const { login } = require('../controllers/login.controller');
 
 const routes = Router()

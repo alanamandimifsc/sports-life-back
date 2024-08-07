@@ -108,6 +108,8 @@ class LocalController {
 
     async readOne(req, res) {
         const { local_id } = req.params
+        console.log('local_id:', local_id);
+        console.log('usuarioId:', req.usuarioId);
         try {
             const local = await Locais.findOne({
                 where: {
@@ -138,6 +140,8 @@ class LocalController {
         try {
             const { local_id } = req.params
             const { nome, descricao, endereco, cidade, estado, pais, atividades } = req.body
+            console.log('local_id:', local_id);
+            console.log('usuarioId:', req.usuarioId);
 
             const local = await Locais.findOne({
                 where: {
@@ -145,6 +149,10 @@ class LocalController {
                     usuario_id: req.usuarioId
                 }
             })
+            const locais = await Locais.findAll({});
+            // console.log(locais)
+
+            console.log('Local encontrado:', local);
             if (!local) {
                 return res.status(404).json({ mensagem: 'Local não encontrado!' })
             }
@@ -210,12 +218,17 @@ class LocalController {
     async delete(req, res) {
         try {
             const { local_id } = req.params
+            console.log(local_id)
+            const locais = await Locais.findAll({
+            });
+            console.log(locais)
             const local = await Locais.findOne({
                 where: {
                     id: local_id,
                     usuario_id: req.usuarioId
                 }
             })
+            console.log(local)
             if (!local) {
                 return res.status(404).json({ mensagem: 'Local não encontrado!' })
             }
