@@ -15,6 +15,6 @@ routes.use('/usuario', usuariosRoutes);
 routes.use('/login', login);
 routes.use('/local', autenticador, locaisRoutes);
 
-// routes.use('/locais', locaisRoutes);
+routes.use('/locais', locaisRoutes);
 
 module.exports = routes
