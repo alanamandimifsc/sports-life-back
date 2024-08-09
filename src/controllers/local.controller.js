@@ -2,7 +2,7 @@ const Locais = require('../models/Locais')
 const Atividades_locais = require('../models/Atividades_Locais')
 const Atividades = require('../models/Atividades')
 const axios = require('axios')
-const { param } = require('../routes/locais.routes')
+// const { param } = require('../routes/locais.routes')
 
 
 class LocalController {
@@ -37,19 +37,44 @@ class LocalController {
                 return atividade.nome;
             }));
 
+            let local = await Locais.findOne({
+                where: {
+                    nome
+                },
+                paranoid: false
+            });
 
-            const local = await Locais.create({
-                nome,
-                descricao,
-                latitude: lat,
-                longitude: lon,
-                endereco,
-                cidade,
-                estado,
-                pais,
-                linkGoogleMaps,
-                usuario_id: req.usuarioId
-            })
+            if (local) {
+                if (local.deletedAt) {
+                    await local.restore();
+                    local.descricao = descricao;
+                    local.latitude = lat;
+                    local.longitude = lon;
+                    local.endereco = endereco;
+                    local.cidade = cidade;
+                    local.estado = estado;
+                    local.pais = pais;
+                    local.linkGoogleMaps = linkGoogleMaps;
+                    local.usuario_id = req.usuarioId;
+                    await local.save();
+                } else {
+                    return res.status(400).json({ error: 'Local já cadastrado!' });
+                }
+            } else {
+
+                local = await Locais.create({
+                    nome,
+                    descricao,
+                    latitude: lat,
+                    longitude: lon,
+                    endereco,
+                    cidade,
+                    estado,
+                    pais,
+                    linkGoogleMaps,
+                    usuario_id: req.usuarioId
+                });
+            }
             const atividadesLocaisPromises = atividades.map(async (atividade_id) => {
                 console.log(atividade_id)
                 return Atividades_locais.create({
@@ -241,6 +266,30 @@ class LocalController {
             return res.status(200).json({ mensagem: 'Local deletado com sucesso!' })
         } catch (error) {
             return res.status(500).json({ mensagem: error.message })
+        }
+    }
+
+    async getLink(req, res) {
+        try {
+            const { local_id } = req.params;
+
+            const local = await Locais.findOne({
+                where: { id: local_id },
+                attributes: ['linkGoogleMaps'],
+                paranoid: true
+            });
+
+            if (!local) {
+                return res.status(404).json({ error: 'Local não encontrado!' });
+            }
+
+            return res.json({
+                linkGoogleMaps: local.linkGoogleMaps
+            });
+
+        } catch (err) {
+            console.log(err.message);
+            return res.status(500).json({ error: 'Erro ao buscar o link do Google Maps.' });
         }
     }
 }

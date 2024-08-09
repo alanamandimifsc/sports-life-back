@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon src/index.js"
+    "start:dev": "node ./autogen.swagger.js && nodemon src/index.js",
+    "start:prod": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && node ./autogen.swagger.js && node ./src/index.js"
   },
   "keywords": [],
   "author": "",
