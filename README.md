@@ -64,25 +64,19 @@ sportslife/
 
 4. Configure o banco de dados no arquivo .env (será necessário criar dentro da pasta principal)
 
-5. Execute as migrações para criar as tabelas:
+5. Execute o comando:
     ```bash
-    npx sequelize db:migrate
+    npm start:prod
    ```
-6. Execute os seeders para popular o banco de dados com dados iniciais:
-    ```bash
-    npx sequelize db:seed:all 
-   ```
-7. Inicie o servidor em modo de desenvolvimento:
-    ```bash
-    npm run start:dev
-   ```
-8. Acesse a aplicação em [http://localhost:3000](http://localhost:3000).
 
-9.  Para acessar a documentação da API, vá para [http://localhost:3000/api-docs](http://localhost:3000/docs).
+6. Acesse a aplicação em [http://localhost:3000](http://localhost:3000).
+
+
+7.  Para acessar a documentação da API, vá para [http://localhost:3000/docs](http://localhost:3000/docs).
 
 ## Endpoints da API
 
-A documentação completa dos endpoints está disponível através do Swagger. Após iniciar o servidor, acesse [`/docs`](http://localhost:3000/api-docs) para visualizar a documentação.
+A documentação completa dos endpoints está disponível através do Swagger. Após iniciar o servidor, acesse [`/docs`](http://localhost:3000/docs) para visualizar a documentação.
 
 ## Melhorias Futuras
 
