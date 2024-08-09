@@ -72,11 +72,11 @@ sportslife/
 6. Acesse a aplicação em [http://localhost:3000](http://localhost:3000).
 
 
-7.  Para acessar a documentação da API, vá para [http://localhost:3000/docs](http://localhost:3000/docs).
+7.  Para acessar a documentação da API, vá para [http://localhost:3000/doc](http://localhost:3000/doc).
 
 ## Endpoints da API
 
-A documentação completa dos endpoints está disponível através do Swagger. Após iniciar o servidor, acesse [`/docs`](http://localhost:3000/docs) para visualizar a documentação.
+A documentação completa dos endpoints está disponível através do Swagger. Após iniciar o servidor, acesse [`/doc`](http://localhost:3000/doc) para visualizar a documentação.
 
 ## Melhorias Futuras
 

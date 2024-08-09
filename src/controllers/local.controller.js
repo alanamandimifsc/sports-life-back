@@ -90,7 +90,7 @@ class LocalController {
                 atividades: atividadesDetalhes
             };
 
-            return res.json(resposta);
+            return res.status(201).json(resposta);
 
         } catch (err) {
             console.log(err.name)
